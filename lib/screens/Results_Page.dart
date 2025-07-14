@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../Constants.dart';
+import '../constants/constants.dart';
 import '../components/Buttom_Button.dart';
 import '../components/ReusableCard.dart';
-import '../screens/Input_Page.dart';
 
 class ResultsPage extends StatelessWidget {
   ResultsPage({
@@ -19,17 +18,12 @@ class ResultsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('CALCULATOR RESULTS', style: kTitle),
-      ),
+      appBar: AppBar(title: Text('CALCULATOR RESULTS', style: kTitle)),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            'Your Result',
-            style: kYourResult,
-          ),
+          Text('Your Result', style: kYourResult),
           Expanded(
             child: ReusableCard(
               onPress: () {}, // Provide an onPress function here as well
@@ -38,21 +32,14 @@ class ResultsPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
-                      flex: 1,
-                      child: Center(
-                        child: Text(
-                          resulttext.toUpperCase(),
-                          style: kOverWeight,
-                        ),
-                      )),
-                  Expanded(
                     flex: 1,
                     child: Center(
-                      child: Text(
-                        bmiResult,
-                        style: kResultNumber,
-                      ),
+                      child: Text(resulttext.toUpperCase(), style: kOverWeight),
                     ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Center(child: Text(bmiResult, style: kResultNumber)),
                   ),
                   Expanded(
                     flex: 1,
@@ -71,11 +58,7 @@ class ResultsPage extends StatelessWidget {
           ButtomBotton(
             buttontitle: "RE-CALCAULATOR",
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return InputPage();
-                },
-              ));
+              Navigator.pushReplacementNamed(context, '/input');
             },
           ),
         ],

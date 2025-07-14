@@ -1,8 +1,10 @@
 class CalculatorBrain {
-  CalculatorBrain({required this.height, required this.weight});
+  CalculatorBrain(
+      {required this.height, required this.weight, required this.gender});
 
   final int height;
   final int weight;
+  final String gender; // 'male' or 'female'
   double _bmi = 0;
 
   String calculaterBMI() {
@@ -11,22 +13,44 @@ class CalculatorBrain {
   }
 
   String getResult() {
-    if (_bmi >= 25) {
-      return 'Overweight';
-    } else if (_bmi > 18.5) {
-      return 'Normal';
+    if (gender == 'male') {
+      if (_bmi >= 25) {
+        return 'Overweight';
+      } else if (_bmi > 20) {
+        return 'Normal';
+      } else {
+        return 'Underweight';
+      }
     } else {
-      return 'Underweight';
+      // female
+      if (_bmi >= 24) {
+        return 'Overweight';
+      } else if (_bmi > 19) {
+        return 'Normal';
+      } else {
+        return 'Underweight';
+      }
     }
   }
 
   String getinterpretation() {
-    if (_bmi >= 25) {
-      return 'You have a higher than normal body weight. Try to exercise more.';
-    } else if (_bmi > 18.5) {
-      return 'You have a normal body weight. Good job!';
+    if (gender == 'male') {
+      if (_bmi >= 25) {
+        return 'As a male, you have a higher than normal body weight. Try to exercise more.';
+      } else if (_bmi > 20) {
+        return 'You have a normal body weight for a male. Good job!';
+      } else {
+        return 'You have a lower than normal body weight for a male. You can eat a bit more.';
+      }
     } else {
-      return 'You have a lower than normal body weight. You can eat a bit more.';
+      // female
+      if (_bmi >= 24) {
+        return 'As a female, you have a higher than normal body weight. Try to exercise more.';
+      } else if (_bmi > 19) {
+        return 'You have a normal body weight for a female. Good job!';
+      } else {
+        return 'You have a lower than normal body weight for a female. You can eat a bit more.';
+      }
     }
   }
 }

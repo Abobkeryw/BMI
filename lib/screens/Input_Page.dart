@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../Constants.dart';
+import '../constants/constants.dart';
 import '../calculator_brain.dart';
 import '../components/Buttom_Button.dart';
 import '../components/IconContent.dart';
 import '../components/ReusableCard.dart';
 import '../components/Round_Icon_Button.dart';
-import '../screens/Results_Page.dart';
 
-enum Gender {
-  male,
-  female,
-}
+enum Gender { male, female }
 
 int height = 180;
 int weight = 60;
@@ -29,11 +25,7 @@ class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text('BMI CALCULATOR'),
-        ),
-      ),
+      appBar: AppBar(title: Center(child: Text('BMI CALCULATOR'))),
       body: Column(
         children: [
           Expanded(
@@ -81,26 +73,15 @@ class _InputPageState extends State<InputPage> {
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'HEIGHT',
-                    style: kLabelTextStyle,
-                  ),
+                  SizedBox(height: 10),
+                  Text('HEIGHT', style: kLabelTextStyle),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.baseline,
                     textBaseline: TextBaseline.alphabetic,
                     children: [
-                      Text(
-                        height.toString(),
-                        style: kNumberTextStyle,
-                      ),
-                      Text(
-                        'cm',
-                        style: kLabelTextStyle,
-                      )
+                      Text(height.toString(), style: kNumberTextStyle),
+                      Text('cm', style: kLabelTextStyle),
                     ],
                   ),
                   SliderTheme(
@@ -124,7 +105,7 @@ class _InputPageState extends State<InputPage> {
                         },
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -139,14 +120,9 @@ class _InputPageState extends State<InputPage> {
                     cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          height: 5,
-                        ),
+                        SizedBox(height: 5),
                         Text('WEIGHT', style: kLabelTextStyle),
-                        Text(
-                          weight.toString(),
-                          style: kNumberTextStyle,
-                        ),
+                        Text(weight.toString(), style: kNumberTextStyle),
                         Expanded(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -159,9 +135,7 @@ class _InputPageState extends State<InputPage> {
                                   });
                                 },
                               ),
-                              SizedBox(
-                                width: 10,
-                              ),
+                              SizedBox(width: 10),
                               RoundIconButton(
                                 icon: FontAwesomeIcons.plus,
                                 onPressed: () {
@@ -172,7 +146,7 @@ class _InputPageState extends State<InputPage> {
                               ),
                             ],
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -184,17 +158,9 @@ class _InputPageState extends State<InputPage> {
                     cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          'AGE',
-                          style: kLabelTextStyle,
-                        ),
-                        Text(
-                          age.toString(),
-                          style: kNumberTextStyle,
-                        ),
+                        SizedBox(height: 5),
+                        Text('AGE', style: kLabelTextStyle),
+                        Text(age.toString(), style: kNumberTextStyle),
                         Expanded(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -207,9 +173,7 @@ class _InputPageState extends State<InputPage> {
                                   });
                                 },
                               ),
-                              SizedBox(
-                                width: 10,
-                              ),
+                              SizedBox(width: 10),
                               RoundIconButton(
                                 icon: FontAwesomeIcons.plus,
                                 onPressed: () {
@@ -220,29 +184,31 @@ class _InputPageState extends State<InputPage> {
                               ),
                             ],
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
           ButtomBotton(
             buttontitle: "CALCAULATOR",
             onTap: () {
-              CalculatorBrain calcu =
-                  CalculatorBrain(height: height, weight: weight);
-
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return ResultsPage(
-                    bmiResult: calcu.calculaterBMI(),
-                    resulttext: calcu.getResult(),
-                    interpretation: calcu.getinterpretation(),
-                  );
+              CalculatorBrain calcu = CalculatorBrain(
+                height: height,
+                weight: weight,
+                gender: selectedGender == Gender.male ? 'male' : 'female',
+              );
+              Navigator.pushNamed(
+                context,
+                '/results',
+                arguments: {
+                  'bmiResult': calcu.calculaterBMI(),
+                  'resulttext': calcu.getResult(),
+                  'interpretation': calcu.getinterpretation(),
                 },
-              ));
+              );
             },
           ),
         ],

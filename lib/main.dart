@@ -1,22 +1,27 @@
+import 'package:bmi_calculator_flutter_master/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 
-import 'Constants.dart';
-import 'screens/Input_Page.dart';
+import 'constants/constants.dart';
+import 'routes/routes.dart';
 
-void main() => runApp(BMICalculator());
+void main() => runApp(const BMICalculator());
 
 class BMICalculator extends StatelessWidget {
+  const BMICalculator({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: Color(0xFF0A0E21),
-        appBarTheme: AppBarTheme(
+        scaffoldBackgroundColor: const Color(0xFF0A0E21),
+        appBarTheme: const AppBarTheme(
           backgroundColor: Color(0xFF0A0E21),
           titleTextStyle: kTitle,
         ),
       ),
-      home: InputPage(),
+      initialRoute: Routesname.onboarding,
+      onGenerateRoute: AppRoutes.generateRoute,
     );
   }
 }
